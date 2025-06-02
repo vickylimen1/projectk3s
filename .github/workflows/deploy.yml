@@ -30,7 +30,7 @@ jobs:
 
     - name: Update deployment.yaml with new tag
       run: |
-        sed -i "s|image: vickylimen1/apache-site:.*|image: vickylimen1/projectk3s:${SHA}|" deployment.yaml
+        sed -i "s|image: vickylimen1/apache-site:.*|image: vickylimen1/apache-site:${SHA}|" ./deployment.yaml
 
     - name: Commit updated deployment
       run: |
