@@ -16,5 +16,5 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t your-dockerhub-user/apache-site:latest .
-        docker push your-dockerhub-user/apache-site:latest
+        docker build -t vickylimen1/apache-site:latest .
+        docker push vickylimen1/apache-site:latest
