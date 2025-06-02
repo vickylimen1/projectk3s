@@ -32,10 +32,9 @@ jobs:
       run: |
         sed -i "s|image: vickylimen1/apache-site:.*|image: vickylimen1/apache-site:${SHA}|" k3s/deployment.yaml
 
-    - name: Commit updated deployment
+    - name: Push changes
       run: |
         git config user.name "github-actions"
-        git config user.email "actions@github.com"
-        git add k3s/deployment.yaml
-        git commit -m "Update image to ${SHA}"
+        git config user.email "github-actions@github.com"
+        git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}
         git push
