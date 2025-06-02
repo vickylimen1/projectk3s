@@ -21,6 +21,6 @@ spec:
     spec:
       containers:
       - name: apache
-        image: httpd:2.4
+        image: httpd:2.4.59
         ports:
         - containerPort: 80
