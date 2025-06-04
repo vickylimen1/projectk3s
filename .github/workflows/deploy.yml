@@ -14,6 +14,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GH_PAT }}
 
     - name: Set up Docker
       uses: docker/setup-buildx-action@v2
@@ -28,23 +30,14 @@ jobs:
         docker push vickylimen1/apache-site:$SHA
         echo "SHA=$SHA" >> $GITHUB_ENV
 
-    - name: Set Git remote to use PAT
-      run: |
-        git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}
-
-
-    - name: Update deployment.yaml with new tag
+    - name: Update deployment.yaml with new image tag
       run: |
         sed -i "s|image: vickylimen1/apache-site:.*|image: vickylimen1/apache-site:${{ env.SHA }}|" k3s/deployment.yaml
 
-    - name: Configure git to use PAT
+    - name: Commit and push changes to GitHub
       run: |
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
-        git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}
-
-    - name: Commit and push changes
-      run: |
         git add k3s/deployment.yaml
         git commit -m "Update image to ${{ env.SHA }}" || echo "No changes to commit"
         git push origin HEAD:${{ github.ref_name }}
