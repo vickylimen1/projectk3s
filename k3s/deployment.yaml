@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: apache-web
-        image: vickylimen1/apache-site:{{ .Values.image.tag }}
+        image: vickylimen1/apache-site:00c14ab
         ports:
         - containerPort: 80
         resources:
