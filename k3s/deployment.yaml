@@ -14,17 +14,17 @@ spec:
         app: apache
     spec:
       containers:
-      - name: apache-web
-        image: vickylimen1/apache-site:00c14ab
-        ports:
-        - containerPort: 80
-        resources:
-	 requests:
-          cpu: "100m"
-	  memory: "200Mi"
-	 limits:
-  	  cpu: "500m"
-     	  memory: "500Mi"
+        - name: apache-web
+          image: vickylimen1/apache-site:00c14ab
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "200Mi"
+            limits:
+              cpu: "500m"
+              memory: "500Mi"
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -44,4 +44,4 @@ spec:
         name: cpu
         target:
           type: Utilization
-	  averageUtilization: 70
+          averageUtilization: 70
