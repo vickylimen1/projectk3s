@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: apache-web
-          image: vickylimen1/apache-site:00c14ab
+          image: vickylimen1/apache-site:8d33a0b
           ports:
             - containerPort: 80
           resources:
